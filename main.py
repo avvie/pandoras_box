@@ -1,5 +1,6 @@
 import discord
 import os 
+import re 
 import threading
 import sched, time
 import atexit
@@ -34,7 +35,8 @@ async def on_message(message):
       currentClient = users[message.author]
 
     if message.content.startswith('/'):
-      await message.channel.send('Hello! ' + str(currentClient._client))
+      result = droller.handle_message(message.content, message)
+      await message.channel.send(result)
 
 # Free Up Memory every so often 
 

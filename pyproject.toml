@@ -8,6 +8,7 @@ authors = ["avvie1 <<>>"]
 python = "^3.8"
 discord = "^1.0.1"
 quantumrandom = "^1.9.0"
+pycryptodome = "^3.10.1"
 
 [tool.poetry.dev-dependencies]
 
