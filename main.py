@@ -7,7 +7,7 @@ from client import client as user
 
 # Variable Init
 s = sched.scheduler(time.time, time.sleep)
-timeToSleepBeforeCleanUp = 0.1 # in minutes
+timeToSleepBeforeCleanUp = 60 # in minutes
 client = discord.Client()
 droller = roller(client)
 users = {}
