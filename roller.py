@@ -1,12 +1,12 @@
-import quantumrandom
 import re
+import discord
 from Crypto.Random.random import randint
 
 class roller:
-  def __init__(self):
-    self.data = []
+  def __init__(self, client):
+    self.data = ['\U0001F3B2']
 
-  def d10(self):
+  def roll(self, limit):
     return randint(1, 10)
 
   def roll_d10_with_modifier(self, command):
@@ -56,19 +56,42 @@ class roller:
   def substitute_characters(self, command):
     return re.sub("/|d", " ", command.string)
 
-  def handle_message(self, command, message):
+  async def handle_message(self, command, prev_succ = 0):
     result = self.parse_command(command)
 
     if result is None:
       return None
     else:
       processed_list = self.processed_result(result)
-      success = 0
+      success = prev_succ
+      diff = int(result[2])
+      if diff > 10:
+        success = success + 10 - diff
+        diff = 10
+      dice_results = "["
+      tens = 0
+      for elem in processed_list:
+        dice_results = dice_results + str(elem) + " "
+        if elem >= diff:
+          success = success + 1
+        elif elem == 1:
+          success = success - 1
+        if elem == 10:
+          tens = tens + 1
+      dice_results = dice_results + "]"
       
+
+      message = str(success) + " successes rolled! "
+      if tens > 0:
+        message = message + " You rolled: " + str(tens) + " 10s! "
+        #more logic for reroll here
+        
+      message = message + dice_results
+      return (message, tens, diff, success)
 
 
   def processed_result(self, result):
     processed = []
     for i in range(0, int(result[0])):
-      processed.append(self.d10())
+      processed.append(self.roll(int(result[1])))
     return processed

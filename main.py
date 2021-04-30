@@ -1,9 +1,7 @@
 import discord
-import os 
-import re 
+import os
 import threading
 import sched, time
-import atexit
 from roller import roller
 from client import client as user
 
@@ -11,9 +9,10 @@ from client import client as user
 s = sched.scheduler(time.time, time.sleep)
 timeToSleepBeforeCleanUp = 0.1 # in minutes
 client = discord.Client()
-droller = roller()
+droller = roller(client)
 users = {}
 X = []
+reactions = ['\U0001F3B2']
 
 
 # Events
@@ -35,8 +34,28 @@ async def on_message(message):
       currentClient = users[message.author]
 
     if message.content.startswith('/'):
-      result = droller.handle_message(message.content, message)
-      await message.channel.send(result)
+      (result, tens, diff, success) = await droller.handle_message(message.content)
+      new_message = await message.channel.send(result)
+      currentClient.add_roll(new_message, [message.author,tens, diff, success])
+      if tens > 0:
+        await new_message.add_reaction(reactions[0])
+
+@client.event
+async def on_reaction_add(reaction, user):
+  if user == client.user:
+    return
+  if user in users:
+    currentClient = users[user]
+    params = currentClient.get_roll_params(reaction.message)
+    if params is None:
+      return 
+    message = "/" + str(params[1]) + 'd10d' + str(params[2] )
+    (result, tens, diff, success) = await droller.handle_message(message, params[3])
+    new_message = await reaction.message.channel.send(result)
+    currentClient.add_roll(new_message, [user,tens, diff, success])
+    if tens > 0:
+      await new_message.add_reaction(reactions[0])
+  
 
 # Free Up Memory every so often 
 
