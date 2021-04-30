@@ -91,6 +91,14 @@ version = "5.1.0"
 
 [[package]]
 category = "main"
+description = "A Python interface to the ANU Quantum Random Numbers Server"
+name = "quantumrandom"
+optional = false
+python-versions = "*"
+version = "1.9.0"
+
+[[package]]
+category = "main"
 description = "Backported and Experimental Type Hints for Python 3.5+"
 name = "typing-extensions"
 optional = false
@@ -110,7 +118,7 @@ idna = ">=2.0"
 multidict = ">=4.0"
 
 [metadata]
-content-hash = "e230b63752d6de7d164e567afa4ed94584fea1f5d25f9d490fbe71b2660df6e1"
+content-hash = "4b71474ce07b6e285203df51f73b77c4685decc6a07429c722022d18e2ed29ec"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -215,6 +223,9 @@ multidict = [
     {file = "multidict-5.1.0-cp39-cp39-win32.whl", hash = "sha256:fc13a9524bc18b6fb6e0dbec3533ba0496bbed167c56d0aabefd965584557d80"},
     {file = "multidict-5.1.0-cp39-cp39-win_amd64.whl", hash = "sha256:7df80d07818b385f3129180369079bd6934cf70469f99daaebfac89dca288359"},
     {file = "multidict-5.1.0.tar.gz", hash = "sha256:25b4e5f22d3a37ddf3effc0710ba692cfc792c2b9edfb9c05aefe823256e84d5"},
+]
+quantumrandom = [
+    {file = "quantumrandom-1.9.0.tar.gz", hash = "sha256:f41a0aac1fcd3eae621f252f2ae18031c684142d72ce202a766d18b6f40ddf3d"},
 ]
 typing-extensions = [
     {file = "typing_extensions-3.7.4.3-py2-none-any.whl", hash = "sha256:dafc7639cde7f1b6e1acc0f457842a83e722ccca8eef5270af2d74792619a89f"},
