@@ -1,6 +1,6 @@
 import re
 import discord
-from Crypto.Random.random import randint
+from random import randint
 
 class roller:
   def __init__(self, client):

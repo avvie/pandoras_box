@@ -8,7 +8,9 @@ from client import client as user
 # Variable Init
 s = sched.scheduler(time.time, time.sleep)
 timeToSleepBeforeCleanUp = 60 # in minutes
-client = discord.Client()
+intents = discord.Intents.default()
+intents.message_content = True
+client = discord.Client(intents=intents)
 droller = roller(client)
 users = {}
 X = []
@@ -74,5 +76,5 @@ def clean_thread():
 
 
 # Start Client 
-client.run(os.getenv('TOKEN'))
+client.run('ODM3NTc0MDg3OTcwMTI3ODcz.YIuhpw.X06Hj5Ugt0MfhhNbfnDCf7lIVdI')
 
