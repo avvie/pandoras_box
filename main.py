@@ -19,7 +19,7 @@ reactions = ['\U0001F3B2']
 @client.event
 async def on_ready():
   print('logged in as')
-  X = threading.Thread(target = clean_thread).start()
+  #X = threading.Thread(target = clean_thread).start()
 
 @client.event
 async def on_message(message):
