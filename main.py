@@ -75,6 +75,9 @@ def clean_thread():
     clean_inactive()
 
 
+f = open("secretapikey.txt", "r")
+f.readline()
+
 # Start Client 
-client.run('ODM3NTc0MDg3OTcwMTI3ODcz.YIuhpw.X06Hj5Ugt0MfhhNbfnDCf7lIVdI')
+client.run(f.readline())
 
